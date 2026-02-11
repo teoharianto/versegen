@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import ReactMarkdown from "react-markdown";
 import { loadDevotions } from "../utils/devotionStore.js";
 import Sidebar from "../components/Sidebar.jsx";
-import { databases, ensureSession } from "../lib/appwrite.js";
+import { databases } from "../lib/appwrite.js";
 
 const DATABASE_ID = "698c29110039cc83cfc9";
 const COLLECTION_ID = "devotion";
@@ -29,7 +29,6 @@ export default function Devotion() {
   useEffect(() => {
     async function fetchDevotions() {
       try {
-        await ensureSession();
         const response = await databases.listDocuments(
           DATABASE_ID,
           COLLECTION_ID

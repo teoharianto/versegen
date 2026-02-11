@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar.jsx";
-import { databases, ensureSession } from "../lib/appwrite.js";
+import { databases } from "../lib/appwrite.js";
 import { Query } from "appwrite";
 
 const DATABASE_ID = "698c29110039cc83cfc9";
@@ -51,7 +51,6 @@ export default function Ayat() {
   useEffect(() => {
     async function fetchVerses() {
       try {
-        await ensureSession();
         const response = await databases.listDocuments(
           DATABASE_ID,
           COLLECTION_ID
