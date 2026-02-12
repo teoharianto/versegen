@@ -21,6 +21,13 @@ function getRecentDates(count = 7) {
   });
 }
 
+function getSortedDevotionDates(devotions) {
+  return Object.keys(devotions)
+    .map((date) => new Date(date))
+    .filter((date) => !Number.isNaN(date.getTime()))
+    .sort((a, b) => b - a);
+}
+
 export default function Devotion() {
   const [devotions, setDevotions] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -83,7 +90,10 @@ export default function Devotion() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2">
-            {getRecentDates(8).map((date) => {
+            {(Object.keys(devotions).length > 0
+              ? getSortedDevotionDates(devotions)
+              : getRecentDates(8)
+            ).map((date) => {
               const key = toDateKey(date);
               const isActive = key === selectedKey;
               return (
